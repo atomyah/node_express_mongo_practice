@@ -3,5 +3,20 @@ html(lang="ja")
   head
     meta(charset="utf-8")
   body
-    h1 #{title}
-    
+    if user
+      nav
+        span #{user.username}
+        img(src=user.avatar_path)
+    else
+      nav
+        a(href="/signin") ユーザー登録
+        a(href="/login") ログイン
+    h1 投稿一覧
+    section
+      each msg in messages
+        div
+          h2 #{msg.username}
+          p #{msg.message}
+          time #{msg.date}
+        if msg.image_path
+          img(src=msg.image_path)
